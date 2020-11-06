@@ -58,6 +58,7 @@
             // 
             this.textBoxMotDePasse.Location = new System.Drawing.Point(111, 194);
             this.textBoxMotDePasse.Name = "textBoxMotDePasse";
+            this.textBoxMotDePasse.PasswordChar = '•';
             this.textBoxMotDePasse.Size = new System.Drawing.Size(201, 20);
             this.textBoxMotDePasse.TabIndex = 2;
             // 
