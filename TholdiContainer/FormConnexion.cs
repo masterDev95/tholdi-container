@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TholdiContainer.Extensions;
 
 namespace TholdiContainer
 {
@@ -17,18 +18,13 @@ namespace TholdiContainer
             InitializeComponent();
         }
 
-        private void CentreHorizontalControl(Control control)
-        {
-            control.Location = new Point(this.Width / 2 - control.Width / 2, control.Location.Y);
-        }
-
         private void FormConnexion_Load(object sender, EventArgs e)
         {
             // Centrage horizontal des controls
-            CentreHorizontalControl(pbTholdi);
-            CentreHorizontalControl(textBoxIdentifiant);
-            CentreHorizontalControl(textBoxMotDePasse);
-            CentreHorizontalControl(buttonConnexion);
+            this.CentreHorizontalControl(pbTholdi);
+            this.CentreHorizontalControl(textBoxIdentifiant);
+            this.CentreHorizontalControl(textBoxMotDePasse);
+            this.CentreHorizontalControl(buttonConnexion);
         }
     }
 }
