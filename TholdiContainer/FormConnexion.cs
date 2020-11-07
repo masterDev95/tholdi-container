@@ -21,10 +21,10 @@ namespace TholdiContainer
         private void FormConnexion_Load(object sender, EventArgs e)
         {
             // Centrage horizontal des controls
-            this.CentreHorizontalControl(pbTholdi);
-            this.CentreHorizontalControl(textBoxIdentifiant);
-            this.CentreHorizontalControl(textBoxMotDePasse);
-            this.CentreHorizontalControl(buttonConnexion);
+            this.CentrerHorizontalement(pbTholdi);
+            this.CentrerHorizontalement(textBoxIdentifiant);
+            this.CentrerHorizontalement(textBoxMotDePasse);
+            this.CentrerHorizontalement(buttonConnexion);
         }
     }
 }
