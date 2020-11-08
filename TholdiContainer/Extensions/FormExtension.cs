@@ -12,7 +12,7 @@ namespace TholdiContainer.Extensions
         /// <param name="control"></param>
         public static void CentrerHorizontalement(this Form form, Control control)
         {
-            control.Location = new Point(form.Width / 2 - control.Width / 2, control.Location.Y);
+            control.Location = new Point(form.ClientSize.Width / 2 - control.Width / 2, control.Location.Y);
         }
     }
 }
