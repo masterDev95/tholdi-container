@@ -25,6 +25,9 @@ namespace TholdiContainer
             this.CentrerHorizontalement(textBoxIdentifiant);
             this.CentrerHorizontalement(textBoxMotDePasse);
             this.CentrerHorizontalement(buttonConnexion);
+
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
     }
 }

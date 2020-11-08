@@ -25,6 +25,9 @@ namespace TholdiContainer
             this.CentrerHorizontalement(buttonConsulter);
             this.CentrerHorizontalement(buttonModifier);
             this.CentrerHorizontalement(buttonSupprimer);
+
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
     }
 }

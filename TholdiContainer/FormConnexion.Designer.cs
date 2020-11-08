@@ -95,6 +95,7 @@
             // 
             // FormConnexion
             // 
+            this.AcceptButton = this.buttonConnexion;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(440, 309);
@@ -104,7 +105,6 @@
             this.Controls.Add(this.textBoxMotDePasse);
             this.Controls.Add(this.textBoxIdentifiant);
             this.Controls.Add(this.pbTholdi);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormConnexion";
             this.Text = "Connexion";
             this.Load += new System.EventHandler(this.FormConnexion_Load);
