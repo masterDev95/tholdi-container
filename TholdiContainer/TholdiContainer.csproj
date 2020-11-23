@@ -108,6 +108,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tables\Container.cs" />
+    <Compile Include="Tables\Decision.cs" />
+    <Compile Include="Tables\Declaration.cs" />
+    <Compile Include="Tables\Inspection.cs" />
+    <Compile Include="Tables\Probleme.cs" />
     <EmbeddedResource Include="FormConnexion.resx">
       <DependentUpon>FormConnexion.cs</DependentUpon>
     </EmbeddedResource>
