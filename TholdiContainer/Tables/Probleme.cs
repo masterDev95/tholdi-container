@@ -10,7 +10,7 @@ namespace TholdiContainer.Tables
         private static string selectSql = "SELECT * FROM PROBLEME";
         private static string selectByIdSql = "SELECT * FROM PROBLEME WHERE CODEPROBLEME = ?CodeProbleme ";
         private static string updateSql = "UPDATE PROBLEME SET LIBELLEPROBLEME=?LibelleProbleme WHERE CODEPROBLEME=?CodeProbleme";
-        private static string insertSql = "INSERT INTO PROBLEME (CODEPROBLEME, LIBELLEPROBLEME) VALUES (?CodeProbleme, ?LibelleProbleme)";
+        private static string insertSql = "INSERT INTO PROBLEME (LIBELLEPROBLEME) VALUES (?LibelleProbleme)";
 
         private bool isNew = true;
 
@@ -76,10 +76,11 @@ namespace TholdiContainer.Tables
             MySqlCommand commandSql = openConnection.CreateCommand();
 
             commandSql.CommandText = Probleme.insertSql;
-            commandSql.Parameters.Add(new MySqlParameter("?CodeProbleme", this.CodeProbleme));
             commandSql.Parameters.Add(new MySqlParameter("?LibelleProbleme", this.LibelleProbleme));
             commandSql.Prepare();
             commandSql.ExecuteNonQuery();
+
+            this.CodeProbleme = (short)commandSql.LastInsertedId;
 
             openConnection.Close();
         }

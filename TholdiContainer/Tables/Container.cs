@@ -7,10 +7,10 @@ namespace TholdiContainer.Tables
 {
     class Container
     {
-        private static string selectSql = "SELECT * FROM PROBLEME";
-        private static string selectByIdSql = "SELECT * FROM PROBLEME WHERE NUMCONTAINER = ?NumContainer ";
-        private static string updateSql = "UPDATE PROBLEME SET DATEACHAT=?DateAchat, TYPECONTAINER=?TypeContainer, DATEDERNIEREINSP=?DateDerniereInsp WHERE NUMCONTAINER=?NumContainer";
-        private static string insertSql = "INSERT INTO PROBLEME (NUMCONTAINER, DATEACHAT, TYPECONTAINER, DATEDERNIEREINSP) VALUES (?NumContainer, ?DateAchat, ?TypeContainer, ?DateDerniereInsp)";
+        private static string selectSql = "SELECT * FROM CONTAINER";
+        private static string selectByIdSql = "SELECT * FROM CONTAINER WHERE NUMCONTAINER = ?NumContainer ";
+        private static string updateSql = "UPDATE CONTAINER SET DATEACHAT=?DateAchat, TYPECONTAINER=?TypeContainer, DATEDERNIEREINSP=?DateDerniereInsp WHERE NUMCONTAINER=?NumContainer";
+        private static string insertSql = "INSERT INTO CONTAINER (DATEACHAT, TYPECONTAINER, DATEDERNIEREINSP) VALUES (?DateAchat, ?TypeContainer, ?DateDerniereInsp)";
 
         private bool isNew = true;
 
@@ -82,12 +82,13 @@ namespace TholdiContainer.Tables
             MySqlCommand commandSql = openConnection.CreateCommand();
 
             commandSql.CommandText = Container.insertSql;
-            commandSql.Parameters.Add(new MySqlParameter("?NumContainer", this.NumContainer));
             commandSql.Parameters.Add(new MySqlParameter("?DateAchat", this.DateAchat));
             commandSql.Parameters.Add(new MySqlParameter("?TypeContainer", this.TypeContainer));
             commandSql.Parameters.Add(new MySqlParameter("?DateDerniereInsp", this.DateDerniereInsp));
             commandSql.Prepare();
             commandSql.ExecuteNonQuery();
+
+            this.NumContainer = (int)commandSql.LastInsertedId;
 
             openConnection.Close();
         }

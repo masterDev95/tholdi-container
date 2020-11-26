@@ -10,11 +10,11 @@ namespace TholdiContainer.Tables
         private static string selectSql = "SELECT * FROM DECISION";
         private static string selectByIdSql = "SELECT * FROM DECISION WHERE NUMCONTAINER = ?NumContainer AND NUMINSPECTION=?NumInspection AND CODETRAVAUX=?CodeTravaux";
         private static string updateSql = "UPDATE DECISION SET DATEACHAT=?DateAchat, TYPECONTAINER=?TypeContainer, DATEDERNIEREINSP=?DateDerniereInsp WHERE NUMCONTAINER=?NumContainer";
-        private static string insertSql = "INSERT INTO DECISION (NUMCONTAINER, DATEACHAT, TYPECONTAINER, DATEDERNIEREINSP) VALUES (?NumContainer, ?DateAchat, ?TypeContainer, ?DateDerniereInsp)";
+        private static string insertSql = "INSERT INTO DECISION (NUMCONTAINER, NUMINSPECTION, CODETRAVAUX, DATEDERNIEREINSP) VALUES (?NumContainer, ?DateAchat, ?TypeContainer, ?DateDerniereInsp)";
 
         private bool isNew = true;
 
-        public int NumContainer { get; set; }
+        public int NumContainer { get; private set; }
         public short NumInspection { get; set; }
         public string CodeTravaux { get; set; }
         public DateTime DateEnvoi { get; set; }

@@ -9,15 +9,15 @@ namespace TholdiContainer.Tables
     {
         private static string selectSql = "SELECT * FROM DECLARATION";
         private static string selectByIdSql = "SELECT * FROM DECLARATION WHERE CODEDECLARATION=?CodeDeclaration";
-        private static string updateSql = "UPDATE DECISION" +
-                                          "SET CODEDECLARATION=?NumContainer, NUMCONTAINER=?CodeDocker, CODEDOCKER=?CodeProbleme, CODEPROBLEME=?CodeProbleme, COMMENTAIREDECLARATION=?CommentaireDeclaration, DATEDECLARATION=?DateDeclaration, URGENCE=?Urgence, TRAITE=?Traite" +
+        private static string updateSql = "UPDATE DECLARATION" +
+                                          "SET NUMCONTAINER=?CodeDocker, CODEDOCKER=?CodeProbleme, CODEPROBLEME=?CodeProbleme, COMMENTAIREDECLARATION=?CommentaireDeclaration, DATEDECLARATION=?DateDeclaration, URGENCE=?Urgence, TRAITE=?Traite" +
                                           "WHERE NUMCONTAINER=?CommentaireDeclaration";
-        private static string insertSql = "INSERT INTO DECISION (CODEDECLARATION, NUMCONTAINER, CODEDOCKER, CODEPROBLEME, COMMENTAIREDECLARATION, DATEDECLARATION, URGENCE, TRAITE)" +
-                                          "VALUES (?CodeDeclaration, ?NumContainer, ?CodeDocker, ?CodeProbleme, ?CommentaireDeclaration, ?DateDeclaration, ?Urgence, ?Traite)";
+        private static string insertSql = "INSERT INTO DECLARATION (NUMCONTAINER, CODEDOCKER, CODEPROBLEME, COMMENTAIREDECLARATION, DATEDECLARATION, URGENCE, TRAITE)" +
+                                          "VALUES (?NumContainer, ?CodeDocker, ?CodeProbleme, ?CommentaireDeclaration, ?DateDeclaration, ?Urgence, ?Traite)";
 
         private bool isNew = true;
 
-        public int CodeDeclaration { get; set; }
+        public int CodeDeclaration { get; private set; }
         public string CommentaireDeclaration { get; set; }
         public DateTime DateDeclaration { get; set; }
         public bool Urgence { get; set; }
@@ -100,7 +100,6 @@ namespace TholdiContainer.Tables
             MySqlCommand commandSql = openConnection.CreateCommand();
 
             commandSql.CommandText = Declaration.insertSql;
-            commandSql.Parameters.Add(new MySqlParameter("?CodeDeclaration", this.CodeDeclaration));
             commandSql.Parameters.Add(new MySqlParameter("?NumContainer", this.UnContainer.NumContainer));
             commandSql.Parameters.Add(new MySqlParameter("?CodeDocker", this.UnDocker.CodeDocker));
             commandSql.Parameters.Add(new MySqlParameter("?CodeProbleme", this.UnProbleme.CodeProbleme));
@@ -110,6 +109,8 @@ namespace TholdiContainer.Tables
             commandSql.Parameters.Add(new MySqlParameter("?Traite", this.Traite));
             commandSql.Prepare();
             commandSql.ExecuteNonQuery();
+
+            this.CodeDeclaration = (int)commandSql.LastInsertedId;
 
             openConnection.Close();
         }

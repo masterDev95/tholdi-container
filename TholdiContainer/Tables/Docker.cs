@@ -13,7 +13,7 @@ namespace TholdiContainer.Tables
         private static string selectSql = "SELECT * FROM DOCKER";
         private static string selectByIdSql = "SELECT * FROM DOCKER WHERE CODEDOCKER=?CodeDocker ";
         private static string updateSql = "UPDATE DOCKER SET NOMDOCKER=?NomDocker, PRENOMDOCKER=?PrenomDocker WHERE CODEDOCKER=?CodeDocker";
-        private static string insertSql = "INSERT INTO DOCKER (CODEDOCKER, NOMDOCKER, PRENOMDOCKER) VALUES (?CodeDocker, ?NomDocker, ?PrenomDocker)";
+        private static string insertSql = "INSERT INTO DOCKER (NOMDOCKER, PRENOMDOCKER) VALUES (?NomDocker, ?PrenomDocker)";
 
         private bool isNew = true;
 
