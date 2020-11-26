@@ -12,18 +12,12 @@ namespace TholdiContainer.Tables
         private static string updateSql = "UPDATE PROBLEME SET DATEACHAT=?DateAchat, TYPECONTAINER=?TypeContainer, DATEDERNIEREINSP=?DateDerniereInsp WHERE NUMCONTAINER=?NumContainer";
         private static string insertSql = "INSERT INTO PROBLEME (NUMCONTAINER, DATEACHAT, TYPECONTAINER, DATEDERNIEREINSP) VALUES (?NumContainer, ?DateAchat, ?TypeContainer, ?DateDerniereInsp)";
 
-        private bool isNew;
+        private bool isNew = true;
 
         public int NumContainer { get; private set; }
         public DateTime DateAchat { get; set; }
         public string TypeContainer { get; set; }
         public DateTime DateDerniereInsp { get; set; }
-
-        public Container(int numContainer)
-        {
-            this.NumContainer = numContainer;
-            this.isNew = true;
-        }
 
         static public Container Fetch(int numContainer)
         {
@@ -40,8 +34,9 @@ namespace TholdiContainer.Tables
 
             if (existEnregistrement)
             {
-                unContainer = new Container(int.Parse(jeuEnregistrements["NumContainer"].ToString()))
+                unContainer = new Container()
                 {
+                    NumContainer = int.Parse(jeuEnregistrements["NumContainer"].ToString()),
                     DateAchat = DateTime.Parse(jeuEnregistrements["DateAchat"].ToString()),
                     TypeContainer = jeuEnregistrements["TypeContainer"].ToString(),
                     DateDerniereInsp = DateTime.Parse(jeuEnregistrements["DateDerniereInsp"].ToString()),
@@ -65,8 +60,9 @@ namespace TholdiContainer.Tables
 
             while (jeuEnregistrements.Read())
             {
-                Container unContainer = new Container(int.Parse(jeuEnregistrements["NumContainer"].ToString()))
+                Container unContainer = new Container()
                 {
+                    NumContainer = int.Parse(jeuEnregistrements["NumContainer"].ToString()),
                     DateAchat = DateTime.Parse(jeuEnregistrements["DateAchat"].ToString()),
                     TypeContainer = jeuEnregistrements["TypeContainer"].ToString(),
                     DateDerniereInsp = DateTime.Parse(jeuEnregistrements["DateDerniereInsp"].ToString()),

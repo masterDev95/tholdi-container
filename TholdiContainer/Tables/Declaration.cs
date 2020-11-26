@@ -8,29 +8,23 @@ namespace TholdiContainer.Tables
     class Declaration
     {
         private static string selectSql = "SELECT * FROM DECLARATION";
-        private static string selectByIdSql = "SELECT * FROM DECLARATION WHERE CODEDECLARATION = ?CodeDeclaration";
-        private static string updateSql = "UPDATE DECISION SET DATEACHAT=?NumContainer, TYPECONTAINER=?CodeDocker, DATEDERNIEREINSP=?CodeProbleme WHERE NUMCONTAINER=?CommentaireDeclaration";
-        private static string insertSql = "INSERT INTO DECISION (NUMCONTAINER, DATEACHAT, TYPECONTAINER, DATEDERNIEREINSP) VALUES (?NumContainer, ?DateAchat, ?TypeContainer, ?DateDerniereInsp)";
+        private static string selectByIdSql = "SELECT * FROM DECLARATION WHERE CODEDECLARATION=?CodeDeclaration";
+        private static string updateSql = "UPDATE DECISION" +
+                                          "SET CODEDECLARATION=?NumContainer, NUMCONTAINER=?CodeDocker, CODEDOCKER=?CodeProbleme, CODEPROBLEME=?CodeProbleme, COMMENTAIREDECLARATION=?CommentaireDeclaration, DATEDECLARATION=?DateDeclaration, URGENCE=?Urgence, TRAITE=?Traite" +
+                                          "WHERE NUMCONTAINER=?CommentaireDeclaration";
+        private static string insertSql = "INSERT INTO DECISION (CODEDECLARATION, NUMCONTAINER, CODEDOCKER, CODEPROBLEME, COMMENTAIREDECLARATION, DATEDECLARATION, URGENCE, TRAITE)" +
+                                          "VALUES (?CodeDeclaration, ?NumContainer, ?CodeDocker, ?CodeProbleme, ?CommentaireDeclaration, ?DateDeclaration, ?Urgence, ?Traite)";
 
-        private bool isNew;
+        private bool isNew = true;
 
         public int CodeDeclaration { get; set; }
-        public int NumContainer { get; set; }
-        public string CodeDocker { get; set; }
-        public string CodeProbleme { get; set; }
         public string CommentaireDeclaration { get; set; }
         public DateTime DateDeclaration { get; set; }
         public bool Urgence { get; set; }
         public bool Traite { get; set; }
-
-        public Declaration(int codeDeclaration, int numContainer, string codeDocker, string codeProbleme)
-        {
-            this.CodeDeclaration = codeDeclaration;
-            this.NumContainer = numContainer;
-            this.CodeDocker = CodeDocker;
-            this.CodeProbleme = CodeProbleme;
-            this.isNew = true;
-        }
+        public Container UnContainer { get; set; }
+        public Docker UnDocker { get; set; }
+        public Probleme UnProbleme { get; set; }
 
         static public Declaration Fetch(int codeDeclaration)
         {
@@ -47,17 +41,16 @@ namespace TholdiContainer.Tables
 
             if (existEnregistrement)
             {
-                codeDeclaration = int.Parse(jeuEnregistrements["CodeDeclaration"].ToString());
-                int numContainer = int.Parse(jeuEnregistrements["NumContainer"].ToString());
-                string codeDocker = jeuEnregistrements["CodeDocker"].ToString();
-                string codeProbleme = jeuEnregistrements["CodeProbleme"].ToString();
-
-                Declaration uneDeclaration = new Declaration(codeDeclaration, numContainer, codeDocker, codeProbleme)
+                Declaration uneDeclaration = new Declaration()
                 {
+                    CodeDeclaration = int.Parse(jeuEnregistrements["CodeDeclaration"].ToString()),
                     CommentaireDeclaration = jeuEnregistrements["CommentaireDeclaration"].ToString(),
                     DateDeclaration = DateTime.Parse(jeuEnregistrements["DateDeclaration"].ToString()),
                     Urgence = bool.Parse(jeuEnregistrements["Urgence"].ToString()),
                     Traite = bool.Parse(jeuEnregistrements["Traite"].ToString()),
+                    UnContainer = Container.Fetch(int.Parse(jeuEnregistrements["NumContainer"].ToString())),
+                    UnDocker = Docker.Fetch(short.Parse(jeuEnregistrements["NumContainer"].ToString())),
+                    UnProbleme = Probleme.Fetch(short.Parse(jeuEnregistrements["NumContainer"].ToString())),
                     isNew = false
                 };
             }
@@ -83,12 +76,16 @@ namespace TholdiContainer.Tables
                 string codeDocker = jeuEnregistrements["CodeDocker"].ToString();
                 string codeProbleme = jeuEnregistrements["CodeProbleme"].ToString();
 
-                Declaration uneDeclaration = new Declaration(codeDeclaration, numContainer, codeDocker, codeProbleme)
+                Declaration uneDeclaration = new Declaration()
                 {
+                    CodeDeclaration = int.Parse(jeuEnregistrements["CodeDeclaration"].ToString()),
                     CommentaireDeclaration = jeuEnregistrements["CommentaireDeclaration"].ToString(),
                     DateDeclaration = DateTime.Parse(jeuEnregistrements["DateDeclaration"].ToString()),
                     Urgence = bool.Parse(jeuEnregistrements["Urgence"].ToString()),
                     Traite = bool.Parse(jeuEnregistrements["Traite"].ToString()),
+                    UnContainer = Container.Fetch(int.Parse(jeuEnregistrements["NumContainer"].ToString())),
+                    UnDocker = Docker.Fetch(short.Parse(jeuEnregistrements["NumContainer"].ToString())),
+                    UnProbleme = Probleme.Fetch(short.Parse(jeuEnregistrements["NumContainer"].ToString())),
                     isNew = false
                 };
             }
@@ -104,17 +101,15 @@ namespace TholdiContainer.Tables
 
             commandSql.CommandText = Declaration.insertSql;
             commandSql.Parameters.Add(new MySqlParameter("?CodeDeclaration", this.CodeDeclaration));
-            commandSql.Parameters.Add(new MySqlParameter("?NumContainer", this.NumContainer));
-            commandSql.Parameters.Add(new MySqlParameter("?CodeDocker", this.CodeDocker));
-            commandSql.Parameters.Add(new MySqlParameter("?CodeProbleme", this.CodeProbleme));
+            commandSql.Parameters.Add(new MySqlParameter("?NumContainer", this.UnContainer.NumContainer));
+            commandSql.Parameters.Add(new MySqlParameter("?CodeDocker", this.UnDocker.CodeDocker));
+            commandSql.Parameters.Add(new MySqlParameter("?CodeProbleme", this.UnProbleme.CodeProbleme));
             commandSql.Parameters.Add(new MySqlParameter("?CommentaireDeclaration", this.CommentaireDeclaration));
             commandSql.Parameters.Add(new MySqlParameter("?DateDeclaration", this.DateDeclaration));
             commandSql.Parameters.Add(new MySqlParameter("?Urgence", this.Urgence));
             commandSql.Parameters.Add(new MySqlParameter("?Traite", this.Traite));
             commandSql.Prepare();
             commandSql.ExecuteNonQuery();
-
-            this.NumContainer = Convert.ToInt16(commandSql.LastInsertedId);
 
             openConnection.Close();
         }
@@ -126,9 +121,9 @@ namespace TholdiContainer.Tables
 
             commandSql.CommandText = Declaration.updateSql;
             commandSql.Parameters.Add(new MySqlParameter("?CodeDeclaration", this.CodeDeclaration));
-            commandSql.Parameters.Add(new MySqlParameter("?NumContainer", this.NumContainer));
-            commandSql.Parameters.Add(new MySqlParameter("?CodeDocker", this.CodeDocker));
-            commandSql.Parameters.Add(new MySqlParameter("?CodeProbleme", this.CodeProbleme));
+            commandSql.Parameters.Add(new MySqlParameter("?NumContainer", this.UnContainer.NumContainer));
+            commandSql.Parameters.Add(new MySqlParameter("?CodeDocker", this.UnDocker.CodeDocker));
+            commandSql.Parameters.Add(new MySqlParameter("?CodeProbleme", this.UnProbleme.CodeProbleme));
             commandSql.Parameters.Add(new MySqlParameter("?CommentaireDeclaration", this.CommentaireDeclaration));
             commandSql.Parameters.Add(new MySqlParameter("?DateDeclaration", this.DateDeclaration));
             commandSql.Parameters.Add(new MySqlParameter("?Urgence", this.Urgence));

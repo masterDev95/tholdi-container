@@ -12,18 +12,12 @@ namespace TholdiContainer.Tables
         private static string updateSql = "UPDATE PROBLEME SET LIBELLEPROBLEME=?LibelleProbleme WHERE CODEPROBLEME=?CodeProbleme";
         private static string insertSql = "INSERT INTO PROBLEME (CODEPROBLEME, LIBELLEPROBLEME) VALUES (?CodeProbleme, ?LibelleProbleme)";
 
-        private bool isNew;
+        private bool isNew = true;
 
         public short CodeProbleme { get; private set; }
         public string LibelleProbleme { get; set; }
 
-        public Probleme(short codeProbleme)
-        {
-            this.CodeProbleme = codeProbleme;
-            this.isNew = true;
-        }
-
-        static public Probleme Fetch(int codeProbleme)
+        static public Probleme Fetch(short codeProbleme)
         {
             Probleme unProbleme = null;
             MySqlConnection openConnection = DataBaseAccess.getOpenMySqlConnection();
@@ -38,8 +32,9 @@ namespace TholdiContainer.Tables
 
             if (existEnregistrement)
             {
-                unProbleme = new Probleme(short.Parse(jeuEnregistrements["CodeProbleme"].ToString()))
+                unProbleme = new Probleme()
                 {
+                    CodeProbleme = short.Parse(jeuEnregistrements["CodeProbleme"].ToString()),
                     LibelleProbleme = jeuEnregistrements["LibelleProbleme"].ToString(),
                     isNew = false
                 };
@@ -61,10 +56,11 @@ namespace TholdiContainer.Tables
 
             while (jeuEnregistrements.Read())
             {
-                Probleme unProbleme = new Probleme(short.Parse(jeuEnregistrements["CodeProbleme"].ToString()))
+                Probleme unProbleme = new Probleme()
                 {
+                    CodeProbleme = short.Parse(jeuEnregistrements["CodeProbleme"].ToString()),
                     LibelleProbleme = jeuEnregistrements["LibelleProbleme"].ToString(),
-                    isNew = false,
+                    isNew = false
                 };
 
                 resultat.Add(unProbleme);
