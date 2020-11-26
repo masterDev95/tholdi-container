@@ -5,10 +5,10 @@ using TholdiContainer.DBA;
 
 namespace TholdiContainer.Tables
 {
-    class Container
+    class Conteneur
     {
         private static string selectSql = "SELECT * FROM CONTAINER";
-        private static string selectByIdSql = "SELECT * FROM CONTAINER WHERE NUMCONTAINER = ?NumContainer ";
+        private static string selectByIdSql = "SELECT * FROM CONTAINER WHERE NUMCONTAINER = ?NumContainer";
         private static string updateSql = "UPDATE CONTAINER SET DATEACHAT=?DateAchat, TYPECONTAINER=?TypeContainer, DATEDERNIEREINSP=?DateDerniereInsp WHERE NUMCONTAINER=?NumContainer";
         private static string insertSql = "INSERT INTO CONTAINER (DATEACHAT, TYPECONTAINER, DATEDERNIEREINSP) VALUES (?DateAchat, ?TypeContainer, ?DateDerniereInsp)";
 
@@ -19,13 +19,13 @@ namespace TholdiContainer.Tables
         public string TypeContainer { get; set; }
         public DateTime DateDerniereInsp { get; set; }
 
-        static public Container Fetch(int numContainer)
+        static public Conteneur Fetch(int numContainer)
         {
-            Container unContainer = null;
+            Conteneur unContainer = null;
             MySqlConnection openConnection = DataBaseAccess.getOpenMySqlConnection();
             MySqlCommand commandSql = openConnection.CreateCommand();
 
-            commandSql.CommandText = Container.selectByIdSql;
+            commandSql.CommandText = Conteneur.selectByIdSql;
             commandSql.Parameters.Add(new MySqlParameter("?NumContainer", numContainer));
             commandSql.Prepare();
 
@@ -34,7 +34,7 @@ namespace TholdiContainer.Tables
 
             if (existEnregistrement)
             {
-                unContainer = new Container()
+                unContainer = new Conteneur()
                 {
                     NumContainer = int.Parse(jeuEnregistrements["NumContainer"].ToString()),
                     DateAchat = DateTime.Parse(jeuEnregistrements["DateAchat"].ToString()),
@@ -48,19 +48,49 @@ namespace TholdiContainer.Tables
             return unContainer;
         }
 
-        static public List<Container> FetchAll()
+        static public List<Conteneur> FetchAll()
         {
-            List<Container> resultat = new List<Container>();
+            List<Conteneur> resultat = new List<Conteneur>();
             MySqlConnection openConnection = DataBaseAccess.getOpenMySqlConnection();
             MySqlCommand commandSql = openConnection.CreateCommand();
 
-            commandSql.CommandText = Container.selectSql;
+            commandSql.CommandText = Conteneur.selectSql;
 
             MySqlDataReader jeuEnregistrements = commandSql.ExecuteReader();
 
             while (jeuEnregistrements.Read())
             {
-                Container unContainer = new Container()
+                Conteneur unContainer = new Conteneur()
+                {
+                    NumContainer = int.Parse(jeuEnregistrements["NumContainer"].ToString()),
+                    DateAchat = DateTime.Parse(jeuEnregistrements["DateAchat"].ToString()),
+                    TypeContainer = jeuEnregistrements["TypeContainer"].ToString(),
+                    DateDerniereInsp = DateTime.Parse(jeuEnregistrements["DateDerniereInsp"].ToString()),
+                    isNew = false
+                };
+
+                resultat.Add(unContainer);
+            }
+
+            openConnection.Close();
+            return resultat;
+        }
+
+        static public List<Conteneur> FetchBy(string champs, string valeurChamps)
+        {
+            string sql = $"SELECT * FROM CONTAINER WHERE {champs}={valeurChamps}";
+            List<Conteneur> resultat = new List<Conteneur>();
+            MySqlConnection openConnection = DataBaseAccess.getOpenMySqlConnection();
+            MySqlCommand commandSql = openConnection.CreateCommand();
+
+            commandSql.CommandText = sql;
+            commandSql.Prepare();
+
+            MySqlDataReader jeuEnregistrements = commandSql.ExecuteReader();
+
+            while (jeuEnregistrements.Read())
+            {
+                Conteneur unContainer = new Conteneur()
                 {
                     NumContainer = int.Parse(jeuEnregistrements["NumContainer"].ToString()),
                     DateAchat = DateTime.Parse(jeuEnregistrements["DateAchat"].ToString()),
@@ -81,7 +111,7 @@ namespace TholdiContainer.Tables
             MySqlConnection openConnection = DataBaseAccess.getOpenMySqlConnection();
             MySqlCommand commandSql = openConnection.CreateCommand();
 
-            commandSql.CommandText = Container.insertSql;
+            commandSql.CommandText = Conteneur.insertSql;
             commandSql.Parameters.Add(new MySqlParameter("?DateAchat", this.DateAchat));
             commandSql.Parameters.Add(new MySqlParameter("?TypeContainer", this.TypeContainer));
             commandSql.Parameters.Add(new MySqlParameter("?DateDerniereInsp", this.DateDerniereInsp));
@@ -98,7 +128,7 @@ namespace TholdiContainer.Tables
             MySqlConnection openConnection = DataBaseAccess.getOpenMySqlConnection();
             MySqlCommand commandSql = openConnection.CreateCommand();
 
-            commandSql.CommandText = Container.updateSql;
+            commandSql.CommandText = Conteneur.updateSql;
             commandSql.Parameters.Add(new MySqlParameter("?NumContainer", this.NumContainer));
             commandSql.Parameters.Add(new MySqlParameter("?DateAchat", this.DateAchat));
             commandSql.Parameters.Add(new MySqlParameter("?TypeContainer", this.TypeContainer));
