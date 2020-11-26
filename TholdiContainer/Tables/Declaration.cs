@@ -22,7 +22,7 @@ namespace TholdiContainer.Tables
         public DateTime DateDeclaration { get; set; }
         public bool Urgence { get; set; }
         public bool Traite { get; set; }
-        public Container UnContainer { get; set; }
+        public Conteneur UnContainer { get; set; }
         public Docker UnDocker { get; set; }
         public Probleme UnProbleme { get; set; }
 
@@ -48,7 +48,7 @@ namespace TholdiContainer.Tables
                     DateDeclaration = DateTime.Parse(jeuEnregistrements["DateDeclaration"].ToString()),
                     Urgence = bool.Parse(jeuEnregistrements["Urgence"].ToString()),
                     Traite = bool.Parse(jeuEnregistrements["Traite"].ToString()),
-                    UnContainer = Container.Fetch(int.Parse(jeuEnregistrements["NumContainer"].ToString())),
+                    UnContainer = Conteneur.Fetch(int.Parse(jeuEnregistrements["NumContainer"].ToString())),
                     UnDocker = Docker.Fetch(short.Parse(jeuEnregistrements["NumContainer"].ToString())),
                     UnProbleme = Probleme.Fetch(short.Parse(jeuEnregistrements["NumContainer"].ToString())),
                     isNew = false
@@ -83,7 +83,7 @@ namespace TholdiContainer.Tables
                     DateDeclaration = DateTime.Parse(jeuEnregistrements["DateDeclaration"].ToString()),
                     Urgence = bool.Parse(jeuEnregistrements["Urgence"].ToString()),
                     Traite = bool.Parse(jeuEnregistrements["Traite"].ToString()),
-                    UnContainer = Container.Fetch(int.Parse(jeuEnregistrements["NumContainer"].ToString())),
+                    UnContainer = Conteneur.Fetch(int.Parse(jeuEnregistrements["NumContainer"].ToString())),
                     UnDocker = Docker.Fetch(short.Parse(jeuEnregistrements["NumContainer"].ToString())),
                     UnProbleme = Probleme.Fetch(short.Parse(jeuEnregistrements["NumContainer"].ToString())),
                     isNew = false
