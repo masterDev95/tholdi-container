@@ -8,6 +8,7 @@ namespace TholdiContainer.Tables
     class Probleme
     {
         private static string selectSql = "SELECT * FROM PROBLEME";
+        private static string selectTypeContainer = "SELECT LIBELLEPROBLEME FROM PROBLEME";
         private static string selectByIdSql = "SELECT * FROM PROBLEME WHERE CODEPROBLEME = ?CodeProbleme ";
         private static string updateSql = "UPDATE PROBLEME SET LIBELLEPROBLEME=?LibelleProbleme WHERE CODEPROBLEME=?CodeProbleme";
         private static string insertSql = "INSERT INTO PROBLEME (LIBELLEPROBLEME) VALUES (?LibelleProbleme)";
@@ -65,6 +66,52 @@ namespace TholdiContainer.Tables
 
                 resultat.Add(unProbleme);
             }
+
+            openConnection.Close();
+            return resultat;
+        }
+
+        static public List<Probleme> FetchBy(string champs, string valeurChamps)
+        {
+            string sql = $"SELECT * FROM PROBLEME WHERE {champs}={valeurChamps}";
+            List<Probleme> resultat = new List<Probleme>();
+            MySqlConnection openConnection = DataBaseAccess.getOpenMySqlConnection();
+            MySqlCommand commandSql = openConnection.CreateCommand();
+
+            commandSql.CommandText = sql;
+            commandSql.Prepare();
+
+            MySqlDataReader jeuEnregistrements = commandSql.ExecuteReader();
+
+            while (jeuEnregistrements.Read())
+            {
+                Probleme unProbleme = new Probleme()
+                {
+                    CodeProbleme = short.Parse(jeuEnregistrements["CodeProbleme"].ToString()),
+                    LibelleProbleme = jeuEnregistrements["LibelleProbleme"].ToString(),
+                    isNew = false
+                };
+
+                resultat.Add(unProbleme);
+            }
+
+            openConnection.Close();
+            return resultat;
+        }
+
+        static public List<string> FetchTypeProbleme()
+        {
+            List<string> resultat = new List<string>();
+            MySqlConnection openConnection = DataBaseAccess.getOpenMySqlConnection();
+            MySqlCommand commandSql = openConnection.CreateCommand();
+
+            commandSql.CommandText = selectTypeContainer;
+            commandSql.Prepare();
+
+            MySqlDataReader jeuEnregistrements = commandSql.ExecuteReader();
+
+            while (jeuEnregistrements.Read())
+                resultat.Add(jeuEnregistrements["LIBELLEPROBLEME"].ToString());
 
             openConnection.Close();
             return resultat;
