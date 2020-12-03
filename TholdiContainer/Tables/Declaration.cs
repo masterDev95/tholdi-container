@@ -71,11 +71,6 @@ namespace TholdiContainer.Tables
 
             while (jeuEnregistrements.Read())
             {
-                int codeDeclaration = int.Parse(jeuEnregistrements["CodeDeclaration"].ToString());
-                int numContainer = int.Parse(jeuEnregistrements["NumContainer"].ToString());
-                string codeDocker = jeuEnregistrements["CodeDocker"].ToString();
-                string codeProbleme = jeuEnregistrements["CodeProbleme"].ToString();
-
                 Declaration uneDeclaration = new Declaration()
                 {
                     CodeDeclaration = int.Parse(jeuEnregistrements["CodeDeclaration"].ToString()),
@@ -88,6 +83,8 @@ namespace TholdiContainer.Tables
                     UnProbleme = Probleme.Fetch(short.Parse(jeuEnregistrements["NumContainer"].ToString())),
                     isNew = false
                 };
+
+                resultat.Add(uneDeclaration);
             }
 
             openConnection.Close();
