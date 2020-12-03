@@ -20,5 +20,17 @@ namespace TholdiContainer
             listesDesProblemes.DataSource = Probleme.FetchAll();
             comboBoxTypeProbleme.DataSource = Probleme.FetchTypeProbleme();
         }
+
+        private void buttonAjouter_Click(object sender, EventArgs e)
+        {
+            Declaration nouvelleDeclaration = new Declaration
+            {
+                CommentaireDeclaration = richTextBoxCommentaire.Text,
+                DateDeclaration = DateTime.Now,
+                Traite = radioButtonIsTraite.Checked,
+                UnContainer = dataGridViewConteneur.CurrentRow.DataBoundItem as Conteneur,
+                UnDocker = dataGridViewDockers.CurrentRow.DataBoundItem as Docker
+            };
+        }
     }
 }
