@@ -14,5 +14,17 @@ namespace TholdiContainer.Extensions
         {
             control.Location = new Point(form.ClientSize.Width / 2 - control.Width / 2, control.Location.Y);
         }
+
+        /// <summary>
+        /// Ferme la fenêtre courante pour en afficher une autre.
+        /// </summary>
+        /// <param name="form"></param>
+        /// <param name="fenetreSuivante">La fenêtre à afficher</param>
+        public static void ChangerFenetre(this Form form, Form fenetreSuivante)
+        {
+            form.Hide();
+            fenetreSuivante.ShowDialog();
+            form.Close();
+        }
     }
 }
