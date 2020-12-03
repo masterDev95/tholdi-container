@@ -66,6 +66,7 @@
             this.buttonConsulter.TabIndex = 3;
             this.buttonConsulter.Text = "Consulter";
             this.buttonConsulter.UseVisualStyleBackColor = true;
+            this.buttonConsulter.Click += new System.EventHandler(this.buttonConsulter_Click);
             // 
             // buttonSupprimer
             // 

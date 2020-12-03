@@ -28,8 +28,10 @@ namespace TholdiContainer
                 CommentaireDeclaration = richTextBoxCommentaire.Text,
                 DateDeclaration = DateTime.Now,
                 Traite = radioButtonIsTraite.Checked,
+                Urgence = radioButtonIsUrgent.Checked,
                 UnContainer = dataGridViewConteneur.CurrentRow.DataBoundItem as Conteneur,
-                UnDocker = dataGridViewDockers.CurrentRow.DataBoundItem as Docker
+                UnDocker = dataGridViewDockers.CurrentRow.DataBoundItem as Docker,
+                UnProbleme = Probleme.FetchBy("LIBELLEPROBLEME", comboBoxTypeProbleme.SelectedIndex.ToString())[0],
             };
 
             nouvelleDeclaration.Save();
