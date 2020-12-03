@@ -32,9 +32,12 @@ namespace TholdiContainer
 
         private void buttonAjouter_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new FormAjouterDeclaration().ShowDialog();
-            this.Close();
+            this.ChangerFenetre(new FormAjouterDeclaration());
+        }
+
+        private void buttonConsulter_Click(object sender, EventArgs e)
+        {
+            this.ChangerFenetre(new FormConsulterDeclaration());
         }
     }
 }

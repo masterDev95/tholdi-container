@@ -32,9 +32,7 @@ namespace TholdiContainer
 
         private void buttonConnexion_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new FormMenu().ShowDialog();
-            this.Close();
+            this.ChangerFenetre(new FormMenu());
         }
     }
 }
