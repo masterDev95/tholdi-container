@@ -29,5 +29,12 @@ namespace TholdiContainer
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
+
+        private void buttonAjouter_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new FormAjouterDeclaration().ShowDialog();
+            this.Close();
+        }
     }
 }
