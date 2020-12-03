@@ -34,11 +34,16 @@ namespace TholdiContainer
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.codeProblemeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.libelleProblemeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.listesDesProblemes = new System.Windows.Forms.BindingSource(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxTypeProbleme = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.radioButtonIsUrgent = new System.Windows.Forms.RadioButton();
+            this.radioButtonisNotUrgent = new System.Windows.Forms.RadioButton();
+            this.panelRadioUrgent = new System.Windows.Forms.Panel();
             this.codeDockerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nomDockerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prenomDockerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,19 +53,18 @@ namespace TholdiContainer
             this.typeContainerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateDerniereInspDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.listesDesDeclaration = new System.Windows.Forms.BindingSource(this.components);
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.listesDesProblemes = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConteneur)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listesDesProblemes)).BeginInit();
+            this.panelRadioUrgent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listesDesDockers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listesDesDeclaration)).BeginInit();
-            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.listesDesProblemes)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewConteneur
@@ -97,9 +101,9 @@ namespace TholdiContainer
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(331, 242);
+            this.groupBox2.Location = new System.Drawing.Point(25, 242);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(353, 196);
+            this.groupBox2.Size = new System.Drawing.Size(659, 196);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Dockers";
@@ -121,57 +125,106 @@ namespace TholdiContainer
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(305, 136);
+            this.dataGridView1.Size = new System.Drawing.Size(610, 136);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(27, 55);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(235, 84);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = "";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.panelRadioUrgent);
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Controls.Add(this.richTextBox1);
+            this.groupBox4.Location = new System.Drawing.Point(714, 157);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(302, 225);
+            this.groupBox4.TabIndex = 4;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Details";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Commentaire:";
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.dataGridView2);
-            this.groupBox3.Location = new System.Drawing.Point(25, 242);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.comboBoxTypeProbleme);
+            this.groupBox3.Location = new System.Drawing.Point(714, 27);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(278, 196);
-            this.groupBox3.TabIndex = 3;
+            this.groupBox3.Size = new System.Drawing.Size(302, 100);
+            this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Problèmes";
+            this.groupBox3.Text = "Problème";
             // 
-            // dataGridView2
+            // label2
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToResizeColumns = false;
-            this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.codeProblemeDataGridViewTextBoxColumn,
-            this.libelleProblemeDataGridViewTextBoxColumn});
-            this.dataGridView2.DataSource = this.listesDesProblemes;
-            this.dataGridView2.Location = new System.Drawing.Point(23, 30);
-            this.dataGridView2.MultiSelect = false;
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(228, 136);
-            this.dataGridView2.TabIndex = 0;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(24, 30);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Type de problème";
             // 
-            // codeProblemeDataGridViewTextBoxColumn
+            // comboBoxTypeProbleme
             // 
-            this.codeProblemeDataGridViewTextBoxColumn.DataPropertyName = "CodeProbleme";
-            this.codeProblemeDataGridViewTextBoxColumn.HeaderText = "Code";
-            this.codeProblemeDataGridViewTextBoxColumn.Name = "codeProblemeDataGridViewTextBoxColumn";
-            this.codeProblemeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.codeProblemeDataGridViewTextBoxColumn.Width = 50;
+            this.comboBoxTypeProbleme.FormattingEnabled = true;
+            this.comboBoxTypeProbleme.Location = new System.Drawing.Point(27, 55);
+            this.comboBoxTypeProbleme.Name = "comboBoxTypeProbleme";
+            this.comboBoxTypeProbleme.Size = new System.Drawing.Size(168, 21);
+            this.comboBoxTypeProbleme.TabIndex = 0;
             // 
-            // libelleProblemeDataGridViewTextBoxColumn
+            // label4
             // 
-            this.libelleProblemeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.libelleProblemeDataGridViewTextBoxColumn.DataPropertyName = "LibelleProbleme";
-            this.libelleProblemeDataGridViewTextBoxColumn.HeaderText = "Libelle Probleme";
-            this.libelleProblemeDataGridViewTextBoxColumn.Name = "libelleProblemeDataGridViewTextBoxColumn";
-            this.libelleProblemeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(24, 154);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(42, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Urgent:";
             // 
-            // listesDesProblemes
+            // radioButtonIsUrgent
             // 
-            this.listesDesProblemes.DataSource = typeof(TholdiContainer.Tables.Probleme);
+            this.radioButtonIsUrgent.AutoSize = true;
+            this.radioButtonIsUrgent.Location = new System.Drawing.Point(3, 3);
+            this.radioButtonIsUrgent.Name = "radioButtonIsUrgent";
+            this.radioButtonIsUrgent.Size = new System.Drawing.Size(41, 17);
+            this.radioButtonIsUrgent.TabIndex = 5;
+            this.radioButtonIsUrgent.TabStop = true;
+            this.radioButtonIsUrgent.Text = "Oui";
+            this.radioButtonIsUrgent.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonisNotUrgent
+            // 
+            this.radioButtonisNotUrgent.AutoSize = true;
+            this.radioButtonisNotUrgent.Location = new System.Drawing.Point(50, 3);
+            this.radioButtonisNotUrgent.Name = "radioButtonisNotUrgent";
+            this.radioButtonisNotUrgent.Size = new System.Drawing.Size(45, 17);
+            this.radioButtonisNotUrgent.TabIndex = 6;
+            this.radioButtonisNotUrgent.TabStop = true;
+            this.radioButtonisNotUrgent.Text = "Non";
+            this.radioButtonisNotUrgent.UseVisualStyleBackColor = true;
+            // 
+            // panelRadioUrgent
+            // 
+            this.panelRadioUrgent.Controls.Add(this.radioButtonIsUrgent);
+            this.panelRadioUrgent.Controls.Add(this.radioButtonisNotUrgent);
+            this.panelRadioUrgent.Location = new System.Drawing.Point(27, 179);
+            this.panelRadioUrgent.Name = "panelRadioUrgent";
+            this.panelRadioUrgent.Size = new System.Drawing.Size(97, 23);
+            this.panelRadioUrgent.TabIndex = 7;
             // 
             // codeDockerDataGridViewTextBoxColumn
             // 
@@ -236,41 +289,27 @@ namespace TholdiContainer
             // 
             this.listesDesDeclaration.DataSource = typeof(TholdiContainer.Tables.Conteneur);
             // 
-            // richTextBox1
+            // listesDesProblemes
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(27, 55);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(211, 126);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
+            this.listesDesProblemes.DataSource = typeof(TholdiContainer.Tables.Probleme);
             // 
-            // groupBox4
+            // button1
             // 
-            this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Controls.Add(this.richTextBox1);
-            this.groupBox4.Location = new System.Drawing.Point(710, 27);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(476, 299);
-            this.groupBox4.TabIndex = 4;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Details";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Commentaire:";
+            this.button1.Location = new System.Drawing.Point(912, 396);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(104, 42);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Ajouter";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // FormAjouterDeclaration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1253, 479);
-            this.Controls.Add(this.groupBox4);
+            this.ClientSize = new System.Drawing.Size(1046, 470);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FormAjouterDeclaration";
@@ -280,13 +319,15 @@ namespace TholdiContainer
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listesDesProblemes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listesDesDockers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listesDesDeclaration)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.panelRadioUrgent.ResumeLayout(false);
+            this.panelRadioUrgent.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.listesDesDockers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listesDesDeclaration)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listesDesProblemes)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -303,16 +344,20 @@ namespace TholdiContainer
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource listesDesDockers;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.BindingSource listesDesProblemes;
         private System.Windows.Forms.DataGridViewTextBoxColumn codeDockerDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nomDockerDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn prenomDockerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codeProblemeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn libelleProblemeDataGridViewTextBoxColumn;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBoxTypeProbleme;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RadioButton radioButtonisNotUrgent;
+        private System.Windows.Forms.RadioButton radioButtonIsUrgent;
+        private System.Windows.Forms.Panel panelRadioUrgent;
+        private System.Windows.Forms.Button button1;
     }
 }

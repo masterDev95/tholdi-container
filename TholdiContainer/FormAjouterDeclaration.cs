@@ -18,6 +18,7 @@ namespace TholdiContainer
             listesDesDeclaration.DataSource = Conteneur.FetchAll();
             listesDesDockers.DataSource = Docker.FetchAll();
             listesDesProblemes.DataSource = Probleme.FetchAll();
+            comboBoxTypeProbleme.DataSource = Probleme.FetchTypeProbleme();
         }
     }
 }
