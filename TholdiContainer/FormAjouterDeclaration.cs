@@ -31,6 +31,8 @@ namespace TholdiContainer
                 UnContainer = dataGridViewConteneur.CurrentRow.DataBoundItem as Conteneur,
                 UnDocker = dataGridViewDockers.CurrentRow.DataBoundItem as Docker
             };
+
+            nouvelleDeclaration.Save();
         }
     }
 }
