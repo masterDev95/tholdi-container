@@ -15,7 +15,7 @@ namespace TholdiContainer
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormAjouterDeclaration());
+            Application.Run(new FormConnexion());
         }
     }
 }
