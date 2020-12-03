@@ -76,6 +76,35 @@ namespace TholdiContainer.Tables
             return resultat;
         }
 
+        static public List<Docker> FetchBy(string champs, string valeurChamps)
+        {
+            string sql = $"SELECT * FROM CONTAINER WHERE {champs}={valeurChamps}";
+            List<Docker> resultat = new List<Docker>();
+            MySqlConnection openConnection = DataBaseAccess.getOpenMySqlConnection();
+            MySqlCommand commandSql = openConnection.CreateCommand();
+
+            commandSql.CommandText = sql;
+            commandSql.Prepare();
+
+            MySqlDataReader jeuEnregistrements = commandSql.ExecuteReader();
+
+            while (jeuEnregistrements.Read())
+            {
+                Docker unDocker = new Docker()
+                {
+                    CodeDocker = short.Parse(jeuEnregistrements["CodeDocker"].ToString()),
+                    NomDocker = jeuEnregistrements["NomDocker"].ToString(),
+                    PrenomDocker = jeuEnregistrements["PrenomDocker"].ToString(),
+                    isNew = false
+                };
+
+                resultat.Add(unDocker);
+            }
+
+            openConnection.Close();
+            return resultat;
+        }
+
         private void Insert()
         {
             MySqlConnection openConnection = DataBaseAccess.getOpenMySqlConnection();
