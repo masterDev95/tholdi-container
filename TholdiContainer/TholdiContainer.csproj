@@ -92,6 +92,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormAjouterDeclaration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAjouterDeclaration.Designer.cs">
+      <DependentUpon>FormAjouterDeclaration.cs</DependentUpon>
+    </Compile>
     <Compile Include="DBA\DataBaseAccess.cs" />
     <Compile Include="Extensions\FormExtension.cs" />
     <Compile Include="FormConnexion.cs">
@@ -108,12 +114,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tables\Container.cs" />
+    <Compile Include="Tables\Conteneur.cs" />
     <Compile Include="Tables\Decision.cs" />
     <Compile Include="Tables\Declaration.cs" />
     <Compile Include="Tables\Docker.cs" />
     <Compile Include="Tables\Inspection.cs" />
     <Compile Include="Tables\Probleme.cs" />
+    <EmbeddedResource Include="FormAjouterDeclaration.resx">
+      <DependentUpon>FormAjouterDeclaration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormConnexion.resx">
       <DependentUpon>FormConnexion.cs</DependentUpon>
     </EmbeddedResource>
@@ -131,6 +140,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TholdiContainer.Tables.Conteneur.datasource" />
+    <None Include="Properties\DataSources\TholdiContainer.Tables.Docker.datasource" />
+    <None Include="Properties\DataSources\TholdiContainer.Tables.Probleme.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
